@@ -1,0 +1,755 @@
+{
+  "firstLaunch": false,
+  "live": {
+    "customPlayerName": false,
+    "onlySuffix": false
+  },
+  "clientopt": {
+    "scoreboard": {
+      "value": "ON"
+    },
+    "chat": {
+      "value": "ON"
+    },
+    "customSky": true,
+    "healthBar": true,
+    "foodBar": true,
+    "armorBar": true
+  },
+  "zoom": {
+    "smoothCamera": false,
+    "smoothScale": false,
+    "resetFactor": false,
+    "baseFactor": 0.25,
+    "outPerScroll": 0.05,
+    "inPerScroll": 0.05,
+    "lerpAmount": 0.1
+  },
+  "accessibility": {
+    "damageTileStrength": 1.0,
+    "fovEffects": 1.0,
+    "viewBobbing": true,
+    "glintSpeed": 0.5,
+    "glintStrength": 0.75,
+    "oldDamageTilt": true,
+    "fullBright": false,
+    "potionSetting": {
+      "oldPotionColor": false,
+      "foilPotion": false
+    },
+    "alwaysSharpness": false,
+    "legacySkin": true
+  },
+  "toggleSprint": {
+    "toggleSprint": true,
+    "toggleCrouch": false,
+    "sprintCheck": false,
+    "shiftTime": 300,
+    "springText": "自动疾跑 (I)",
+    "sneakText": "潜行中",
+    "color": -1,
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    },
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "hitColor": {
+    "enable": false,
+    "hitColor": 1862205440,
+    "enableArmor": false,
+    "chroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    }
+  },
+  "ping": {
+    "tabList": true,
+    "font": false,
+    "tagType": {
+      "value": "NONE"
+    },
+    "tabListText": "%s",
+    "tagPrefix": "",
+    "defaultColor": -1,
+    "pingList": [
+      {
+        "min": 0,
+        "max": 70,
+        "color": -687407360
+      },
+      {
+        "min": 70,
+        "max": 150,
+        "color": -22016
+      },
+      {
+        "min": 150,
+        "max": 300,
+        "color": -65536
+      },
+      {
+        "min": 300,
+        "max": 1000,
+        "color": -5636096
+      }
+    ]
+  },
+  "blockOverlay": {
+    "enable": false,
+    "color": -65536,
+    "lineWidth": 1.0,
+    "enableOverlay": false,
+    "overlayColor": 553582592,
+    "outlineChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "overlayChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.4
+    }
+  },
+  "itemPhysics": {
+    "enable": true,
+    "enableRotation": false,
+    "enableBobbing": false
+  },
+  "menuBlur": {
+    "enable": false,
+    "chatBlur": false,
+    "firstColor": 63,
+    "secondColor": 63,
+    "radius": 12,
+    "fadeTime": 200
+  },
+  "statusEffect": {
+    "enable": false,
+    "type": "DEFAULT",
+    "showWhileTyping": false,
+    "textShadow": true,
+    "scale": 1.0,
+    "position": {
+      "x": 0,
+      "y": 80
+    },
+    "defaultSetting": {
+      "durationColor": -1,
+      "amplifierColor": -1,
+      "amplifierChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      },
+      "durationChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "warnShow": false,
+    "warnDuration": 20,
+    "classicSetting": {
+      "durationColor": -1,
+      "amplifierColor": -1,
+      "amplifierChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      },
+      "durationChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "defaultColor": false
+  },
+  "armorStatus": {
+    "enable": false,
+    "fixedPosition": false,
+    "scale": 1.0,
+    "showMainHand": true,
+    "showHelmet": true,
+    "showChestplate": true,
+    "showLeggings": true,
+    "showBoots": true,
+    "showOffHand": false,
+    "itemName": false,
+    "showWhileTyping": false,
+    "textShadow": true,
+    "showItemDamage": true,
+    "showArmorDamage": true,
+    "showMaxDamage": false,
+    "durabilityType": "VALUE",
+    "position": {
+      "x": 0,
+      "y": 160
+    },
+    "damageColor": {
+      "staticColor": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      },
+      "defaultColor": -1,
+      "highDamage": -11141291,
+      "mediumDamage": -171,
+      "mediumLowDamage": -22016,
+      "lowDamage": -43691,
+      "lowestDamage": -5636096
+    }
+  },
+  "fps": {
+    "enable": true,
+    "fpsText": "%d FPS",
+    "color": -1,
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    },
+    "position": {
+      "x": 193,
+      "y": 10
+    }
+  },
+  "cps": {
+    "enable": true,
+    "cpsText": "%1 \u00268|\u0026r %2 CPS",
+    "textColor": -1,
+    "setting": {
+      "showPlayerCPS": false,
+      "textColor": -1,
+      "textChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    },
+    "position": {
+      "x": 10,
+      "y": 20
+    }
+  },
+  "speed": {
+    "enable": false,
+    "speedText": " m/s",
+    "textColor": -1,
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    },
+    "position": {
+      "x": 10,
+      "y": 65
+    }
+  },
+  "scoreboard": {
+    "textShadow": true,
+    "scale": 1.0,
+    "showBackground": true,
+    "border": false,
+    "borderWidth": 1.0,
+    "backgroundColor": 788529152,
+    "borderColor": -16777216,
+    "backgroundChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.4
+    },
+    "borderChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.4
+    },
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "keystrokes": {
+    "enable": true,
+    "showTyping": false,
+    "movementKeys": true,
+    "spaceKey": true,
+    "innerBorder": false,
+    "click": {
+      "showClick": true,
+      "leftCPS": true,
+      "rightCPS": true
+    },
+    "textColor": -1,
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    },
+    "colorSetting": {
+      "pressTextColor": -1,
+      "pressBackgroundColor": 1610612736,
+      "pressTextChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      },
+      "pressBackgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "position": {
+      "x": 10,
+      "y": 85
+    }
+  },
+  "location": {
+    "enable": false,
+    "showTyping": false,
+    "showXYZ": true,
+    "showBiome": true,
+    "showDirection": true,
+    "biomeTranslate": true,
+    "horizontal": false,
+    "textColor": -1,
+    "textChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "xyzColor": -1,
+    "xyzChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "position": {
+      "x": 64,
+      "y": 28
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": true,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    }
+  },
+  "shader": {
+    "enableShaders": false
+  },
+  "hitbox": {
+    "enable": false,
+    "player": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "item": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "projectile": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "passive": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "neutral": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "hostile": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "exp": {
+      "enable": true,
+      "lookVector": false,
+      "color": -1,
+      "chroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    }
+  },
+  "saturation": {
+    "enable": false,
+    "saturation": true,
+    "tooltip": true,
+    "foodOverlay": true,
+    "saturationOverlay": true
+  },
+  "crossHair": {
+    "enable": false,
+    "color": {
+      "textColor": -1,
+      "textChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "player": {
+      "textColor": -65536,
+      "textChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "passive": {
+      "textColor": -16711936,
+      "textChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    },
+    "hostile": {
+      "textColor": -65536,
+      "textChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.5
+      }
+    }
+  },
+  "itemUpdate": {
+    "enable": false,
+    "showWhileTyping": false,
+    "line": 6,
+    "duration": 6,
+    "bracketColor": -6709345,
+    "bracketChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.5
+    },
+    "position": {
+      "x": 0,
+      "y": 80
+    },
+    "hudSetting": {
+      "showHud": true,
+      "textShadow": true,
+      "scale": 1.0,
+      "showBackground": false,
+      "border": false,
+      "borderWidth": 1.0,
+      "backgroundColor": 788529152,
+      "borderColor": -16777216,
+      "backgroundChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      },
+      "borderChroma": {
+        "enable": false,
+        "speed": 0.05,
+        "saturation": 1.0,
+        "brightness": 1.0,
+        "alpha": 0.4
+      }
+    }
+  },
+  "itemInfo": {
+    "enable": false,
+    "displayName": true,
+    "lore": true,
+    "enchantments": true,
+    "showAdditional": true,
+    "moreNotify": true,
+    "maxLineLength": 30,
+    "maxLines": 8,
+    "lineHeight": 10,
+    "offsetPerLine": 0.3334,
+    "nameSpacing": 2,
+    "verticalOffset": 0,
+    "baseFadeDuration": 2.0,
+    "fadeDurationExtraLine": 0.5,
+    "maxLoreLines": 3,
+    "showBackground": true,
+    "backgroundColor": 0,
+    "backgroundChroma": {
+      "enable": false,
+      "speed": 0.05,
+      "saturation": 1.0,
+      "brightness": 1.0,
+      "alpha": 0.4
+    }
+  },
+  "fireHeight": 0.5,
+  "ownNameTag": false,
+  "ignoreHorn": false,
+  "disableSneakAnimation": false,
+  "eggDay": true,
+  "autoCopyScreenshot": false,
+  "crosshairOtherPerson": false,
+  "chatCopy": false,
+  "resourcePacks": [
+    "mod_resources",
+    "file/[1.20-1.20.1]Spirited [16x] REVAMP.zip",
+    "vanilla"
+  ],
+  "forceTime": {
+    "value": 0
+  }
+}

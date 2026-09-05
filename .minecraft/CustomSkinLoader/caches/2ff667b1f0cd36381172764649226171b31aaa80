@@ -1,0 +1,9 @@
+{
+  "id" : "42f69c21cc7b4f4cac2978b96a3d2c4e",
+  "name" : "SilentAngel",
+  "properties" : [ {
+    "name" : "textures",
+    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwMDExMjgzOCwKICAicHJvZmlsZUlkIiA6ICI0MmY2OWMyMWNjN2I0ZjRjYWMyOTc4Yjk2YTNkMmM0ZSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTaWxlbnRBbmdlbCIsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9mYWY0NTRkNTY5OWU0ZThlMTRhYWYwYWRjMjY1ZjA0MjVlYmJjNWViNjA1NzhjOTRjOTY1ZTYxMWQ5NTY4OTQ1IgogICAgfQogIH0KfQ=="
+  } ],
+  "profileActions" : [ ]
+}

@@ -1,0 +1,67 @@
+﻿using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Nirvana.Common.Entities.Nirvana;
+using Nirvana.Common.Manager;
+using Nirvana.Common.Utils;
+using Nirvana.Common.Utils.CodeTools;
+using Nirvana.Public.Entities.Update;
+using Nirvana.Public.Utils;
+
+namespace Fantnel.Servlet.OthersController;
+
+[ApiController]
+[Route("[controller]")]
+public class HomeController : ControllerBase {
+    // 设置主题
+    [HttpGet("/api/theme/set")]
+    public IActionResult SetTheme(string name)
+    {
+        ConfigUtil.SaveConfig("theme", name);
+        return Ok(Code.ToJson(ErrorCode.Success));
+    }
+
+    // 获取主题
+    [HttpGet("/api/theme")]
+    public IActionResult GetTheme()
+    {
+        // 从配置中获取主题
+        var theme = ConfigUtil.GetConfig("theme", "default");
+        return Ok(Code.ToJson(ErrorCode.Success, theme));
+    }
+
+    // 获取首页信息
+    [HttpGet("/api/home")]
+    public IActionResult HomeInfo()
+    {
+        return Ok(InfoManager.FantnelInfo);
+    }
+
+    // 设置主题
+    [HttpPost("/api/theme/switch")]
+    public IActionResult ThemeSwitch([FromBody] EntityValue entity)
+    {
+        if (string.IsNullOrEmpty(entity.Value)) {
+            return Ok(Code.ToJson(ErrorCode.ParamError));
+        }
+
+        // 检查主题是否存在
+        if (InitProgram.SafeTheme(entity.Value).GetAwaiter().GetResult()) {
+            ConfigUtil.SaveConfig("themeValue", entity.Value);
+        }
+
+        // 更新主题文件
+        new EntityUpdate {
+            Mode = "ui." + entity.Value,
+            Name = "Fantnel UI"
+        }.CheckUpdateSafe().GetAwaiter().GetResult();
+
+        return Ok(Code.ToJson(ErrorCode.Success));
+    }
+
+    public static string GetIndexHtml()
+    {
+        // 获取运行目录路径
+        var resourcesPath = Path.Combine(PathUtil.WebSitePath, "index.html");
+        return System.IO.File.Exists(resourcesPath) ? System.IO.File.ReadAllText(resourcesPath) : "";
+    }
+}

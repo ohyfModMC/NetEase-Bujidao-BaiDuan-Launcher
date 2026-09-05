@@ -1,0 +1,183 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+using Nirvana.Common.Utils;
+using Nirvana.Common.Utils.Progress;
+using Nirvana.Game.Launcher.Entities;
+using Serilog;
+
+namespace Nirvana.Game.Launcher.Services.Bedrock;
+
+public sealed class LauncherService : IDisposable {
+    private readonly object _disposeLock = new();
+    private readonly IProgress<EntityProgressUpdate> _progress;
+
+    private volatile bool _disposed;
+
+    private Process? _gameProcess;
+
+    private LauncherService(EntityLaunchPeGame entityLaunchGame)
+    {
+        _progress = new Progress<EntityProgressUpdate>();
+        Entity = entityLaunchGame ?? throw new ArgumentNullException(nameof(entityLaunchGame));
+        LastProgress = new EntityProgressUpdate {
+            Id = Identifier,
+            Percent = 0,
+            Message = "Initialized"
+        };
+    }
+
+    private Guid Identifier { get; } = Guid.NewGuid();
+
+    public EntityLaunchPeGame Entity { get; }
+
+    public EntityProgressUpdate LastProgress { get; private set; }
+
+    public void Dispose()
+    {
+        if (_disposed) {
+            return;
+        }
+
+        lock (_disposeLock) {
+            if (_disposed) {
+                return;
+            }
+
+            _disposed = true;
+        }
+
+        try {
+            if (_gameProcess != null) {
+                _gameProcess.Exited -= OnGameProcessExited;
+                if (!_gameProcess.HasExited) {
+                    _gameProcess.CloseMainWindow();
+                    if (!_gameProcess.WaitForExit(5000)) {
+                        _gameProcess.Kill();
+                    }
+                }
+
+                _gameProcess.Dispose();
+                _gameProcess = null;
+            }
+        } catch (Exception ex) {
+            Log.Warning(ex, "Error disposing game process for {0}", Entity.GameId);
+        }
+    }
+
+    public event Action<Guid>? Exited;
+
+    private async Task LaunchGameAsync()
+    {
+        try {
+            if (_disposed) return;
+            await DownloadGameResourcesAsync().ConfigureAwait(false);
+            if (!_disposed) {
+                var port = await LaunchProxyAsync().ConfigureAwait(false);
+                if (!_disposed) {
+                    await StartGameProcessAsync(port).ConfigureAwait(false);
+                }
+            }
+        } catch (OperationCanceledException) {
+            UpdateProgress(100, "Launch cancelled");
+        } catch (Exception ex2) {
+            Log.Error(ex2, "Error while launching game for {0}", Entity.GameId);
+            UpdateProgress(100, "Launch failed");
+        }
+    }
+
+    private async Task DownloadGameResourcesAsync()
+    {
+        UpdateProgress(5, "Installing game resources");
+        if (!await InstallerService.DownloadMinecraftAsync().ConfigureAwait(false)) {
+            throw new InvalidOperationException("Failed to download Minecraft resources");
+        }
+    }
+
+    private Task<int> LaunchProxyAsync()
+    {
+        UpdateProgress(60, "Launching proxy");
+        var availablePort = Tools.GetUnusedPort();
+        return Task.FromResult(availablePort);
+    }
+
+    private Task StartGameProcessAsync(int port)
+    {
+        UpdateProgress(70, "Launching game process");
+        var launchPath = GetLaunchPath();
+        ValidateLaunchPath(launchPath);
+        ConfigService.GenerateLaunchConfig(Entity.SkinPath, Entity.RoleName, Entity.GameId, port);
+        var argumentsPath = Path.Combine(PathUtil.CppGamePath, "launch.cppconfig");
+        var process = CommandService.StartGame(launchPath, argumentsPath);
+        if (process == null) {
+            Log.Error("Game launch failed for LaunchType: {0}, Role: {1}", Entity.LaunchType, Entity.RoleName);
+            throw new InvalidOperationException("Failed to start game process");
+        }
+
+        SetupGameProcess(process);
+        UpdateProgress(100, "Running");
+        Log.Information("Game launched successfully. LaunchType: {0}, ProcessID: {1}, Role: {2}", Entity.LaunchType, process.Id, Entity.RoleName);
+        return Task.CompletedTask;
+    }
+
+    private string GetLaunchPath()
+    {
+        if (Entity.LaunchType == EnumLaunchType.Custom && !string.IsNullOrEmpty(Entity.LaunchPath))
+            return Path.Combine(Entity.LaunchPath, "windowsmc", "Minecraft.Windows.exe");
+        return Path.Combine(PathUtil.CppGamePath, "windowsmc", "Minecraft.Windows.exe");
+    }
+
+    private static void ValidateLaunchPath(string launchPath)
+    {
+        if (!File.Exists(launchPath))
+            throw new FileNotFoundException("Executable not found at " + launchPath, launchPath);
+    }
+
+    private void SetupGameProcess(Process process)
+    {
+        _gameProcess = process;
+        _gameProcess.EnableRaisingEvents = true;
+        _gameProcess.Exited += OnGameProcessExited;
+    }
+
+    private void OnGameProcessExited(object? sender, EventArgs e)
+    {
+        try {
+            Exited?.Invoke(Identifier);
+        } catch (Exception ex) {
+            Log.Warning(ex, "Error in game process exit handler for {0}", Entity.GameId);
+        }
+    }
+
+    private void UpdateProgress(int percent, string message)
+    {
+        if (_disposed) {
+            return;
+        }
+
+        var value = LastProgress = new EntityProgressUpdate {
+            Id = Identifier,
+            Percent = percent,
+            Message = message
+        };
+        try {
+            _progress.Report(value);
+            if (percent == 100) {
+                SyncProgressBarUtil.ProgressBar.ClearCurrent();
+            }
+        } catch (Exception ex) {
+            Log.Warning(ex, "Error reporting progress for {0}", Entity.GameId);
+        }
+    }
+
+    public Process? GetProcess()
+    {
+        return _disposed ? _gameProcess : null;
+    }
+
+    public void ShutdownAsync()
+    {
+        Dispose();
+    }
+}

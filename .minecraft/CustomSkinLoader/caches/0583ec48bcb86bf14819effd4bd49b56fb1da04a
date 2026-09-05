@@ -1,0 +1,9 @@
+{
+  "id" : "09b04a0bc7384eb7a091b6fef2d6825b",
+  "name" : "Haie",
+  "properties" : [ {
+    "name" : "textures",
+    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNzMwNjkzNiwKICAicHJvZmlsZUlkIiA6ICIwOWIwNGEwYmM3Mzg0ZWI3YTA5MWI2ZmVmMmQ2ODI1YiIsCiAgInByb2ZpbGVOYW1lIiA6ICJIYWllIiwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkwNTQ1MTg0MDA1MDczM2MwZWRhYjhjMjAxY2E2MzJkNWE1ZDAwNjg5OWQxM2VkZDY2MzAzMmM2ZTUxYzUzMzEiCiAgICB9CiAgfQp9"
+  } ],
+  "profileActions" : [ ]
+}

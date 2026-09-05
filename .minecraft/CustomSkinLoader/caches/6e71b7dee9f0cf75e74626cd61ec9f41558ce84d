@@ -1,0 +1,9 @@
+{
+  "id" : "88702fa6c2a54d56a718538dcd01a258",
+  "name" : "Cheemms",
+  "properties" : [ {
+    "name" : "textures",
+    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwMDEwNjE2NywKICAicHJvZmlsZUlkIiA6ICI4ODcwMmZhNmMyYTU0ZDU2YTcxODUzOGRjZDAxYTI1OCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDaGVlbW1zIiwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2ZlODdkZjg3NmM1ZTViMTg4OWM2NjkwZDM4MzllZWVhZmYxMmY1MDIzNDFmZGU3NTE3ZDU0M2U4NGQwMTE5YTAiCiAgICB9CiAgfQp9"
+  } ],
+  "profileActions" : [ ]
+}

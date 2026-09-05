@@ -1,0 +1,9 @@
+{
+  "id" : "fa564a6baa3c46dfb0e4448efe5b738b",
+  "name" : "djamilou",
+  "properties" : [ {
+    "name" : "textures",
+    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNDgyNzM0NCwKICAicHJvZmlsZUlkIiA6ICJmYTU2NGE2YmFhM2M0NmRmYjBlNDQ0OGVmZTViNzM4YiIsCiAgInByb2ZpbGVOYW1lIiA6ICJkamFtaWxvdSIsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9mMzAxYTA2NzMxZjRlNjNjMWEzYTU3MDI4M2Y4YTFiZTQ0MzU5N2U1ZWNjZTZmNGZiMTBlMzk1N2UyMzcyNTNlIgogICAgfQogIH0KfQ=="
+  } ],
+  "profileActions" : [ ]
+}

@@ -1,0 +1,130 @@
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Nirvana.Common.Utils;
+using Nirvana.Common.Utils.CodeTools;
+using Nirvana.Game.Launcher.Services.Java;
+using Nirvana.Game.Launcher.Utils;
+using Nirvana.Public.Entities.NEL;
+using Nirvana.Public.Manager;
+using Nirvana.WPFLauncher.Protocol;
+using Serilog;
+
+namespace Nirvana.Public.Message;
+
+public static class ProxiesMessage {
+    /**
+     * 启动本地代理
+     * @param id 游戏服务器ID
+     * @param name 玩家名称
+     */
+    public static async Task<EntityProxyBase> StartProxyAsync(string id, string name, string mode = "net")
+    {
+        Log.Information("--------------");
+        Log.Information("正在启动本地代理...");
+        Log.Information("名称：{0}", name);
+        ActiveGameAndProxies.Close(id, name); // 清理旧代理
+        var port = Tools.GetUnusedPort(); // 获取没被占用的端口
+        return await StartProxyAsyncTo(id, name, port, mode);
+    }
+
+    /**
+     * 启动本地代理 [真正的]
+     * @param id 游戏服务器ID
+     * @param name 玩家名称
+     */
+    public static async Task<RunningProxy> StartProxyAsyncTo(string id, string name, int port = 25565, string mode = "net")
+    {
+        if ("rental".Equals(mode)) {
+            return await StartProxyAsyncRental(id, name, port);
+        }
+
+        return await StartProxyAsyncNet(id, name, port);
+    }
+
+    private static async Task<RunningProxy> StartProxyAsyncNet(string id, string name, int port = 25565)
+    {
+        try {
+            // 服务器详细信息
+            var server = await NPFLauncher.GetNetGameDetailByIdAsync(id);
+
+            // 服务器地址
+            var address = await NPFLauncher.GetNetGameServerAddressAsync(id);
+
+            // NThread.Start(() => {
+            //     address = NPFLauncher.GetNetGameServerAddressAsync(id).GetAwaiter().GetResult();
+            // });
+
+            // 服务器版本
+            var version = server.McVersionList[0]; // 1.20
+            var gameVersion = GameVersionUtil.GetEnumFromGameVersion(version.Name);
+
+            var serverModInfo = await InstallerService.InstallGameMods(gameVersion, server.EntityId);
+
+            var mods = JsonSerializer.Serialize(serverModInfo);
+
+            // 服务器角色信息
+            var character = await ServersGameMessage.GetUserName(server.EntityId, name);
+            if (character == null) {
+                throw new ErrorCodeException(ErrorCode.NotFoundName);
+            }
+
+            // 前往游戏页 并 前往启动游戏页 (必须 await, 否则皮肤 API 无游戏会话上下文返回空)
+            await InterConn.LoginStartAndGameStart(server.EntityId);
+            // await X19.InterconnectionApi.GameStartAsync(server.EntityId);
+
+            // 插件初始化
+            PluginMessage.InitializeAuto();
+
+            // 创建代理 并 下载资源
+            var interceptor = new InterceptorManager(server, character, version, address, mods, port).Interceptor;
+
+            // 增加代理
+            return ActiveGameAndProxies.Add(interceptor, server.EntityId);
+        } catch (Exception ex) {
+            Log.Error("启动代理失败：{0}", ex.Message);
+            throw;
+        }
+    }
+
+    private static async Task<RunningProxy> StartProxyAsyncRental(string id, string name, int port = 25565)
+    {
+        try {
+            // 服务器详细信息
+            var server = await NPFLauncher.GetRentalGameDetailsAsync(id);
+
+            // 服务器地址
+            var address = await NPFLauncher.GetGameRentalAddressAsync(server.EntityId);
+
+            // 服务器版本
+            var versionName = server.McVersion; // 1.20
+            var gameVersion = GameVersionUtil.GetEnumFromGameVersion(versionName);
+
+            var serverModInfo = await InstallerService.InstallGameMods(gameVersion, server.EntityId, true);
+
+            var mods = JsonSerializer.Serialize(serverModInfo);
+
+            // 服务器角色信息
+            var character = await RentalGameMessage.GetUserNameAsync(server.EntityId, name);
+            if (character == null) {
+                throw new ErrorCodeException(ErrorCode.NotFoundName);
+            }
+
+            // 前往游戏页 并 前往启动游戏页 (必须 await, 否则皮肤 API 无游戏会话上下文返回空)
+            await InterConn.LoginStartAndGameStart(server.EntityId);
+            // await X19.InterconnectionApi.GameStartAsync(server.EntityId);
+
+            // 插件初始化
+            PluginMessage.InitializeAuto();
+
+            // 创建代理 并 下载资源
+            var interceptor = new InterceptorManager(server, character, versionName, address, mods, port).Interceptor;
+
+            // 增加代理
+            return ActiveGameAndProxies.Add(interceptor, server.EntityId);
+        } catch (Exception ex) {
+            Log.Error("启动代理失败：{0}", ex.Message);
+            throw;
+        }
+    }
+}

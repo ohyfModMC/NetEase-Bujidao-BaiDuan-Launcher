@@ -1,0 +1,27 @@
+# ===== 游戏本体包含在内; 运行时与缓存不入库 =====
+Java/
+server_proxy/
+authproxy/skins_local/
+
+# ===== C# 构建产物(只传源码) =====
+_build/**/bin/
+_build/**/obj/
+*.user
+
+# ===== Java 构建产物与反编译杂项(只传修改源码+脚本) =====
+*.class
+_decompile/cls/
+_decompile/out/
+_decompile/official/
+_decompile/orig/
+_decompile/coremod_extract/
+_decompile/patched/
+
+# ===== 打包产物(>100MB 单文件 GitHub 拒收, 用 Release 附件上传) =====
+*.zip
+!*.minecraft/**/*.zip
+
+# ===== 日志与临时文件 =====
+*.log
+*.pid
+captcha_*.png

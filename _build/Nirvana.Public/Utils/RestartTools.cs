@@ -1,0 +1,79 @@
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Nirvana.Public.Message;
+using Serilog;
+
+namespace Nirvana.Public.Utils;
+
+public static class RestartTools {
+    /**
+     * 根据参数自动执行
+     * @param args 参数
+     * @param logoInit 日志初始化
+     * @return 是否开启web服务
+     */
+    public static bool Main(string[] args, Action logoInit)
+    {
+        // 初始化日志
+        logoInit.Invoke();
+
+        _ = Task.Run(() => { Maintenance(args); });
+
+        var mode = Get("mode", args);
+        if ("proxy".Equals(mode)) {
+            var id = Get("id", args);
+            var name = Get("name", args);
+            var accountId = Get<int>("account", args);
+            var port = Get("port", args, 25565);
+            var proxyMode = Get("proxyMode", args, "net");
+            AccountMessage.DisableDefaultLogin(); // 禁止默认登录
+            AccountMessage.SwitchAccountToForce(accountId); // 强制切换账号
+            InitProgram.NelInit1(args);
+            ProxiesMessage.StartProxyAsyncTo(id, name, port, proxyMode).GetAwaiter().GetResult();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 防止 线程 因 执行完成 导致程序退出
+     */
+    private static void Maintenance(string[] args)
+    {
+        var pid = Get("MainPid", args, -1);
+        if (pid == -1) {
+            return;
+        }
+
+        while (true) {
+            try {
+                Process.GetProcessById(pid);
+            } catch (ArgumentException) {
+                Log.Error("主进程 {0} 已退出", pid);
+                Thread.Sleep(200);
+                Environment.Exit(0);
+            }
+
+            Thread.Sleep(1000);
+        }
+    }
+
+    public static string Get(string name, string[] args, string? defaultValue = "")
+    {
+        return Get<string>(name, args, defaultValue);
+    }
+
+    public static T Get<T>(string name, string[] args, T? defaultValue = default)
+    {
+        for (var i = 0; i < args.Length; i++) {
+            if (args[i] == "--" + name) {
+                return (T)Convert.ChangeType(args[i + 1], typeof(T));
+            }
+        }
+
+        return defaultValue ?? throw new Exception($"参数 {name} 不能为空");
+    }
+}

@@ -1,0 +1,187 @@
+---- Minecraft Crash Report ----
+// Embeddium instance tainted by mods: [oculus, embeddium_extra]
+// Please do not reach out for Embeddium support without removing these mods first.
+// -------
+// Witty comment unavailable :(
+
+Time: 2026-08-13 12:33:52
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at org.lwjgl.system.JNI.invokeD(Native Method) ~[lwjgl-3.3.1.jar:build 7] {}
+	at org.lwjgl.glfw.GLFW.glfwGetTime(GLFW.java:4775) ~[lwjgl-glfw-3.3.1.jar:build 7] {re:mixin}
+	at com.mojang.blaze3d.platform.GLX.lambda$_initGlfw$2(GLX.java:69) ~[client-1.20.1-20230612.114412-slim.jar:?] {re:classloading}
+	at net.minecraft.Util.m_137569_(Util.java:119) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:classloading,re:mixin}
+	at net.minecraft.Util.m_137550_(Util.java:115) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:classloading,re:mixin}
+	at net.minecraft.client.gui.screens.Screen.m_169378_(Screen.java:480) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_6575_(Screen.java:330) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.TitleScreen.m_7856_(TitleScreen.java:148) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:runtimedistcleaner:A,re:computing_frames,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:mixins.viaforge-mc1201.json:MixinTitleScreen,pl:mixin:APP:obs_overlay.mixins.json:IIIiiiiiiiiIIIIiIiIiIiIiIIiiiiiIiIiIIiiiiiiIIiIiIiIIIIiIiIii,pl:mixin:APP:mixins.oculus.json:MixinTitleScreen,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_232761_(Screen.java:337) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_267719_(Screen.java:426) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_6574_(Screen.java:432) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.m_5741_(Minecraft.java:1272) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at com.mojang.blaze3d.platform.Window.m_85415_(Window.java:229) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,xf:fml:netease_official:com.mojang.blaze3d.platform.Window,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,xf:fml:netease_official:com.mojang.blaze3d.platform.Window,pl:mixin:APP:heypixel.mixins.json:IIIIiIiIiIiiiiiiiIiiIiIIiIiiIiiiIiiiiIIiiiiiiiIiiIiIIiIiiIii,pl:mixin:APP:sodium-extra.mixins.json:adaptive_sync.MixinWindow,pl:mixin:APP:sodium-extra.mixins.json:reduce_resolution_on_mac.MixinWindow,pl:mixin:APP:embeddium.mixins.json:workarounds.context_creation.WindowMixin,pl:mixin:APP:imblocker-forge.mixins.json:WindowMixin,pl:mixin:APP:mixins.oculus.json:MixinWindow,pl:mixin:APP:imblocker-forge.mixins.json:WindowsFullScreenPatch,pl:mixin:A,pl:runtimedistcleaner:A}
+	at org.lwjgl.glfw.GLFWFramebufferSizeCallbackI.callback(GLFWFramebufferSizeCallbackI.java:44) ~[lwjgl-glfw-3.3.1.jar:build 7] {}
+	at org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.3.1.jar:build 7] {}
+	at org.lwjgl.glfw.GLFW.glfwWaitEventsTimeout(GLFW.java:3474) ~[lwjgl-glfw-3.3.1.jar:build 7] {re:mixin}
+	at com.mojang.blaze3d.systems.RenderSystem.limitDisplayFPS(RenderSystem.java:237) ~[client-1.20.1-20230612.114412-slim.jar:?] {re:mixin,re:classloading,pl:mixin:APP:mixins.oculus.json:MixinGlStateManager,pl:mixin:APP:mixins.oculus.json:MixinRenderSystem,pl:mixin:APP:mixins.oculus.json:statelisteners.MixinRenderSystem,pl:mixin:APP:embeddium.mixins.json:workarounds.event_loop.RenderSystemMixin,pl:mixin:A}
+	at net.minecraft.client.Minecraft.m_91383_(Minecraft.java:1173) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.m_91374_(Minecraft.java:718) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.main.Main.main(Main.java:218) ~[client-1.20.1-20230612.114412-slim.jar:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?] {}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?] {}
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?] {}
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:111) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:99) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonClientLaunchHandler.lambda$makeService$0(CommonClientLaunchHandler.java:25) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:186) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:128) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Suspected Mods: NONE
+Stacktrace:
+	at org.lwjgl.system.JNI.invokeD(Native Method) ~[lwjgl-3.3.1.jar%23153!/:build 7] {}
+	at org.lwjgl.glfw.GLFW.glfwGetTime(GLFW.java:4775) ~[lwjgl-glfw-3.3.1.jar%23141!/:build 7] {re:mixin}
+	at com.mojang.blaze3d.platform.GLX.lambda$_initGlfw$2(GLX.java:69) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:classloading}
+	at net.minecraft.Util.m_137569_(Util.java:119) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:classloading,re:mixin}
+	at net.minecraft.Util.m_137550_(Util.java:115) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:classloading,re:mixin}
+	at net.minecraft.client.gui.screens.Screen.m_169378_(Screen.java:480) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_6575_(Screen.java:330) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.TitleScreen.m_7856_(TitleScreen.java:148) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:runtimedistcleaner:A,re:computing_frames,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:mixins.viaforge-mc1201.json:MixinTitleScreen,pl:mixin:APP:obs_overlay.mixins.json:IIIiiiiiiiiIIIIiIiIiIiIiIIiiiiiIiIiIIiiiiiiIIiIiIiIIIIiIiIii,pl:mixin:APP:mixins.oculus.json:MixinTitleScreen,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_232761_(Screen.java:337) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_267719_(Screen.java:426) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.gui.screens.Screen.m_6574_(Screen.java:432) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:iIIiIiIIiIIIiiIIiiiIiIiiiIiiiIIiIiiiIiiiIiiIiIiiiIIiiIIiiiII,pl:mixin:APP:obs_overlay.mixins.json:iIIIiIiIIIIiIiiIIIIiIIiIiiIiIIIIIiIiiIiIIIIiIiIIIiiIiiIIIIiI,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.m_5741_(Minecraft.java:1272) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at com.mojang.blaze3d.platform.Window.m_85415_(Window.java:229) ~[client-1.20.1-20230612.114412-srg.jar%23186!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:netease_official:com.mojang.blaze3d.platform.Window,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,xf:fml:netease_official:com.mojang.blaze3d.platform.Window,pl:mixin:APP:heypixel.mixins.json:IIIIiIiIiIiiiiiiiIiiIiIIiIiiIiiiIiiiiIIiiiiiiiIiiIiIIiIiiIii,pl:mixin:APP:sodium-extra.mixins.json:adaptive_sync.MixinWindow,pl:mixin:APP:sodium-extra.mixins.json:reduce_resolution_on_mac.MixinWindow,pl:mixin:APP:embeddium.mixins.json:workarounds.context_creation.WindowMixin,pl:mixin:APP:imblocker-forge.mixins.json:WindowMixin,pl:mixin:APP:mixins.oculus.json:MixinWindow,pl:mixin:APP:imblocker-forge.mixins.json:WindowsFullScreenPatch,pl:mixin:A,pl:runtimedistcleaner:A}
+	at org.lwjgl.glfw.GLFWFramebufferSizeCallbackI.callback(GLFWFramebufferSizeCallbackI.java:44) ~[lwjgl-glfw-3.3.1.jar%23141!/:build 7] {}
+	at org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.3.1.jar%23153!/:build 7] {}
+	at org.lwjgl.glfw.GLFW.glfwWaitEventsTimeout(GLFW.java:3474) ~[lwjgl-glfw-3.3.1.jar%23141!/:build 7] {re:mixin}
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla, mod_resources
+Stacktrace:
+	at net.minecraft.client.ResourceLoadStateTracker.m_168562_(ResourceLoadStateTracker.java:49) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:classloading}
+	at net.minecraft.client.Minecraft.m_91354_(Minecraft.java:2326) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.m_91374_(Minecraft.java:740) ~[client-1.20.1-20230612.114412-srg.jar:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:heypixel.mixins.json:IiIiiIiIiiIIiiIiIIiIiiiiiIIIIiiiiiiiiiiIIiiIiIIiIiiiiiIIIIii,pl:mixin:APP:heypixel.mixins.json:IIIiiIiiIIiiIiIIIiIiIiIIiiIIiiIIIiiiIiIIiIiIIIiIiIiIIiiIIiiI,pl:mixin:APP:obs_overlay.mixins.json:IIiiIiIiIiiiIIIiiIiIiiIiIIiiiiIiiIiIIiiiiIiiIiIIIiiIIIiiIiII,pl:mixin:APP:xaerohud.mixins.json:MixinMinecraftClient,pl:mixin:APP:waveycapes.mixins.json:PlayerRenderStateMixin,pl:mixin:APP:sodium-extra.mixins.json:gui.MinecraftClientAccessor,pl:mixin:APP:mixins.oculus.json:MixinMinecraft_PipelineManagement,pl:mixin:APP:embeddium.mixins.json:core.render.MinecraftAccessor,pl:mixin:APP:embeddium.mixins.json:core.MinecraftClientMixin,pl:mixin:APP:imblocker-forge.mixins.json:MinecraftClientMixin,pl:mixin:A,pl:runtimedistcleaner:A}
+	at net.minecraft.client.main.Main.main(Main.java:218) ~[client-1.20.1-20230612.114412-slim.jar:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?] {}
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?] {}
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?] {}
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:111) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:99) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at net.minecraftforge.fml.loading.targets.CommonClientLaunchHandler.lambda$makeService$0(CommonClientLaunchHandler.java:25) ~[fmlloader-1.20.1-47.3.0.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:186) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:128) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?] {}
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows Server 2022 (amd64) version 10.0
+	Java Version: 17.0.2, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 271811872 bytes (259 MiB) / 901775360 bytes (860 MiB) up to 2147483648 bytes (2048 MiB)
+	CPUs: 4
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
+	Identifier: Intel64 Family 6 Model 142 Stepping 9
+	Microarchitecture: Amber Lake
+	Frequency (GHz): 2.71
+	Number of physical packages: 1
+	Number of physical CPUs: 2
+	Number of logical CPUs: 4
+	Graphics card #0 name: OrayIddDriver Device
+	Graphics card #0 vendor: Shanghai Best Oray Information Technology Co., Ltd.
+	Graphics card #0 VRAM (MB): 0.00
+	Graphics card #0 deviceId: unknown
+	Graphics card #0 versionInfo: DriverVersion=17.50.19.949
+	Graphics card #1 name: Intel(R) HD Graphics 620
+	Graphics card #1 vendor: Intel Corporation (0x8086)
+	Graphics card #1 VRAM (MB): 1024.00
+	Graphics card #1 deviceId: 0x5916
+	Graphics card #1 versionInfo: DriverVersion=31.0.101.2140
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 2.67
+	Memory slot #0 type: DDR4
+	Virtual memory max (MB): 22186.86
+	Virtual memory used (MB): 14523.64
+	Swap memory total (MB): 5875.96
+	Swap memory used (MB): 2571.17
+	JVM Flags: 3 total; -Xmx2G -XX:+UseG1GC -Xss1M
+	Loaded Shaderpack: (off)
+	Launched Version: 1.20.1-forge-47.3.0
+	Backend library: LWJGL version 3.3.1 build 7
+	Backend API: Intel(R) HD Graphics 620 GL version 3.2.0 - Build 31.0.101.2140, Intel
+	Window size: 1440x829
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'forge'
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: 
+	Current Language: zh_cn
+	CPU: 4x Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
+	ModLauncher: 10.1.2+0+netease_10.1.d0e91c79
+	ModLauncher launch target: forgeclient
+	ModLauncher naming: srg
+	ModLauncher services: 
+		mixin-0.8.5.jar mixin PLUGINSERVICE 
+		eventbus-6.0.5.jar eventbus PLUGINSERVICE 
+		fmlloader-1.20.1-47.3.0.jar slf4jfixer PLUGINSERVICE 
+		fmlloader-1.20.1-47.3.0.jar object_holder_definalize PLUGINSERVICE 
+		fmlloader-1.20.1-47.3.0.jar runtime_enum_extender PLUGINSERVICE 
+		fmlloader-1.20.1-47.3.0.jar capability_token_subclass PLUGINSERVICE 
+		accesstransformers-8.0.4.jar accesstransformer PLUGINSERVICE 
+		fmlloader-1.20.1-47.3.0.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-10.0.9.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		client-1.20.1-20230612.114412-srg.jar             |Minecraft                     |minecraft                     |1.20.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		4689645918724459630@2@8.jar                       |Saturn                        |saturn                        |0.1.3               |DONE      |Manifest: NOSIGNATURE
+		4689645918734260581@2@8.jar                       |ViaForge                      |viaforge                      |4.3.1-SNAPSHOT      |DONE      |Manifest: NOSIGNATURE
+		4689645918615702193@2@8.jar                       |GeckoLib 4                    |geckolib                      |4.7-netease         |DONE      |Manifest: NOSIGNATURE
+		4689645918625526379@2@8.jar                       |HeyPixelMod                   |heypixel                      |1.0-SNAPSHOT        |DONE      |Manifest: NOSIGNATURE
+		xaerolib-forge-1.20.1-1.7.1.jar                   |XaeroLib                      |xaerolib                      |1.7.1               |DONE      |Manifest: NOSIGNATURE
+		[Xaero的小地图] xaerominimap-forge-1.20.1-26.4.2.jar  |Xaero's Minimap               |xaerominimap                  |26.4.2              |DONE      |Manifest: NOSIGNATURE
+		4689645918596490929@2@8.jar                       |EntityCulling                 |entityculling                 |1.7.3               |DONE      |Manifest: NOSIGNATURE
+		4681704866889354274@3@0.jar                       |netease_official              |netease_official              |1.20                |DONE      |Manifest: NOSIGNATURE
+		4689645918750531023@2@8.jar                       |WaveyCapes                    |waveycapes                    |1.5.1               |DONE      |Manifest: NOSIGNATURE
+		4689645918606121145@2@8.jar                       |Ferrite Core                  |ferritecore                   |6.0.1               |DONE      |Manifest: 41:ce:50:66:d1:a0:05:ce:a1:0e:02:85:9b:46:64:e0:bf:2e:cf:60:30:9a:fe:0c:27:e0:63:66:9a:84:ce:8a
+		4689645918714208758@2@8.jar                       |Embeddium Extra               |embeddium_extra               |0.5.4.4+mc1.20.1-bui|DONE      |Manifest: NOSIGNATURE
+		[聊天头像] chat_heads-0.15.6-forge-1.20.jar           |Chat Heads                    |chat_heads                    |0.15.6              |DONE      |Manifest: NOSIGNATURE
+		4689645918575093028@2@8.jar                       |Cloth Config v10 API          |cloth_config                  |11.1.136            |DONE      |Manifest: NOSIGNATURE
+		forge-1.20.1-47.3.0-universal.jar                 |Forge                         |forge                         |47.3.0              |DONE      |Manifest: 84:ce:76:e8:45:35:e4:0e:63:86:df:47:59:80:0f:67:6c:c1:5f:6e:5f:4d:b3:54:47:1a:9f:7f:ed:5e:f2:90
+		4689645918585768165@2@8.jar                       |Embeddium                     |embeddium                     |0.3.31+mc1.20.1     |DONE      |Manifest: NOSIGNATURE
+		4689645918703147413@2@8.jar                       |Oculus                        |oculus                        |1.7.0               |DONE      |Manifest: NOSIGNATURE
+		4689645918693842887@2@8.jar                       |IMBlocker                     |imblocker                     |5.4.4               |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 88088de9-6e96-4a68-b43b-4f00346c11e9
+	FML: 47.3
+	Forge: net.minecraftforge:47.3.0
