@@ -1,6 +1,7 @@
-# FurryNEL Pack (PCL2/HMCL)
+# NetEase-Bujidao-BaiDuan-Launcher
 
-网易我的世界 Java 版整合包。通过自研代理 `fantnelcli` 实现网易账号登录、联机代理、皮肤/头像显示，任何目录下双击 `start.cmd` 即可启动游戏并自动进服。**布吉岛脱盒整合包 —— 解压即玩，一键进服**
+
+网易我的世界 Java 版整合包。通过魔改代理 `FantnelCli` 实现网易账号登录、联机代理、皮肤/头像显示，任何目录下双击 `start.cmd` 即可启动游戏并自动进服。**布吉岛脱盒整合包 —— 解压即玩，一键进服**
 
 专为 `pc.bjdmc.net` 打造的网易 Java 版第三方整合包，双击 `start.cmd` 即可直接进入布吉岛服务器，彻底告别官方启动器限制。
 
