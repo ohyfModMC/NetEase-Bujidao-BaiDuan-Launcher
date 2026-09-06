@@ -1,9 +1,0 @@
-{
-  "id" : "ecb8e360bb004e1eb0b3797505eb467d",
-  "name" : "Mar_s",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNDM1MDY0NCwKICAicHJvZmlsZUlkIiA6ICJlY2I4ZTM2MGJiMDA0ZTFlYjBiMzc5NzUwNWViNDY3ZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJNYXJfcyIsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9lZWU1MjI2MTEwMDVhY2YyNTZkYmQxNTJlOTkyYzYwYzBiYjc5NzhjYjBmMzEyNzgwNzcwMGU0NzhhZDk3NjY0IiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
-  } ],
-  "profileActions" : [ ]
-}

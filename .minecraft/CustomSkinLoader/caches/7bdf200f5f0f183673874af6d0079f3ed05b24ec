@@ -1,9 +1,0 @@
-{
-  "id" : "2629d2465d384ebc86945f4b0075e618",
-  "name" : "entangle",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwODAwMzMxNSwKICAicHJvZmlsZUlkIiA6ICIyNjI5ZDI0NjVkMzg0ZWJjODY5NDVmNGIwMDc1ZTYxOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJlbnRhbmdsZSIsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9hYzY2YmY3ZmNhYTQ5ZjVhZmUxMmRiZjRlN2RhMDI1NGVmMTU0YTUwYWI4M2UxNTQ3YWNmMjA4MDBjMGVlMzY0IgogICAgfQogIH0KfQ=="
-  } ],
-  "profileActions" : [ ]
-}

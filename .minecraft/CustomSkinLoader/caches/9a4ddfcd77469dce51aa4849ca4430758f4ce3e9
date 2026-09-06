@@ -1,9 +1,0 @@
-{
-  "id" : "279f7fbc1e7042a69c1240db964bf0f2",
-  "name" : "Hueee",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwMDA1OTY2MSwKICAicHJvZmlsZUlkIiA6ICIyNzlmN2ZiYzFlNzA0MmE2OWMxMjQwZGI5NjRiZjBmMiIsCiAgInByb2ZpbGVOYW1lIiA6ICJIdWVlZSIsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS82YmI5M2FmY2VlZmViMzc2ZjJmODdmNjVmOTNiODBiMDA1YmM1ZWJiYTlkN2M2OTlhNzFjYzQ5YzYyYzI3MWMxIgogICAgfQogIH0KfQ=="
-  } ],
-  "profileActions" : [ ]
-}

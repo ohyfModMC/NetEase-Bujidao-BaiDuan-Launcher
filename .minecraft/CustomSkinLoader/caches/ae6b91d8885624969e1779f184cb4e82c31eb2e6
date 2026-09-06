@@ -1,9 +1,0 @@
-{
-  "id" : "ca3868f7f0ac404ab0e525903ededece",
-  "name" : "i7r6",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNjk0ODAwMCwKICAicHJvZmlsZUlkIiA6ICJjYTM4NjhmN2YwYWM0MDRhYjBlNTI1OTAzZWRlZGVjZSIsCiAgInByb2ZpbGVOYW1lIiA6ICJpN3I2IiwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzgxNWQzN2E5MTgzOWUyMjE4NjE2ZTQwNTYwYzRlOGU4ZTdmNjk4Yjc5MzZkZjU4ZDJlOGIxODdkMjg1ZjI4YzMiCiAgICB9CiAgfQp9"
-  } ],
-  "profileActions" : [ ]
-}

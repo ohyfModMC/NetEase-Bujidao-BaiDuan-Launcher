@@ -1,9 +1,0 @@
-{
-  "id" : "ba6e430aa6f64340b87578ae0fef43b3",
-  "name" : "sgwl",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNzE2NDQwMCwKICAicHJvZmlsZUlkIiA6ICJiYTZlNDMwYWE2ZjY0MzQwYjg3NTc4YWUwZmVmNDNiMyIsCiAgInByb2ZpbGVOYW1lIiA6ICJzZ3dsIiwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzNlYmU2YmNmYTc1MGQwMmNkMmNjYjc2NzAyMDA0ZjQzM2I4MjQ0N2VmM2Y0MzdkZDVhYjBkNjg1ZDMyMTAxNjUiCiAgICB9CiAgfQp9"
-  } ],
-  "profileActions" : [ ]
-}

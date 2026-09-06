@@ -1,9 +1,0 @@
-{
-  "id" : "8abfb3712ef243f2b98b11796d530a6a",
-  "name" : "Suiwem",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNDY0MDI2MiwKICAicHJvZmlsZUlkIiA6ICI4YWJmYjM3MTJlZjI0M2YyYjk4YjExNzk2ZDUzMGE2YSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTdWl3ZW0iLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjMDAxZWYwZjlmOTk2NjE5OTBhYWQ3MmNkY2VmNWYxNzZhMDA1YWMyNWI1ZjIyOTY0NWFjZTRhM2EwYmJiYyIKICAgIH0KICB9Cn0="
-  } ],
-  "profileActions" : [ ]
-}

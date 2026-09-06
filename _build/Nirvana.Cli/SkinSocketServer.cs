@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Nirvana.Cipher.Cipher.Nirvana;
+using Nirvana.WPFLauncher.Entities.WPFLauncher;
 using Nirvana.WPFLauncher.Entities.WPFLauncher.Minecraft;
 using Nirvana.WPFLauncher.Entities.WPFLauncher.NetGame.GameLaunch.Texture;
 using Nirvana.WPFLauncher.Protocol;
@@ -57,8 +58,10 @@ public static class SkinSocketServer {
     private const long PermanentTicks = long.MaxValue;
     private static readonly TimeSpan NegativeTtl = TimeSpan.FromMinutes(3); // 无皮肤/默认结果短缓存
     private static readonly TimeSpan OnlineBudget = TimeSpan.FromSeconds(9); // 在线取皮总预算, 超时先回默认
-    private static readonly SemaphoreSlim GatewayGate = new(8); // 限制网易 Gateway API 并发, 防 80 人 Tab 同时查询互相拖慢/限流
+    private static readonly SemaphoreSlim GatewayGate = new(12); // 限制网易 Gateway API 并发, 防 80 人 Tab 同时查询互相拖慢/限流
     private static readonly SemaphoreSlim DownloadGate = new(4); // 限制皮肤下载并发
+    // skinId -> 资源下载URL 静态缓存(资源ID与下载地址映射不变), 省掉"取下载列表"网关往返
+    private static readonly ConcurrentDictionary<string, string> ResUrlCache = new();
 
     // ===== Tab 列表预热: 进服瞬间(服务器下发 0x3E Player Info)就预查询+预下载全员皮肤,
     //      2050 到达时命中 UidPlanCache 跳过 API 查询、命中磁盘跳过下载, 秒回 =====
@@ -66,6 +69,7 @@ public static class SkinSocketServer {
     private static readonly ConcurrentDictionary<long, SkinPlan> UidPlanCache = new();
     private static readonly ConcurrentDictionary<long, DateTime> UidNoSkinCache = new(); // 无装备皮肤 uid, 短期内不重复预热
     private static readonly HashSet<long> PreheatingUids = new();
+    private static readonly ConcurrentDictionary<long, Task> PreheatTasks = new(); // 进行中的预热任务, 2050 可等待复用
     private static readonly object PreheatLock = new();
     private static readonly TimeSpan PreheatNegativeTtl = TimeSpan.FromMinutes(5);
 
@@ -87,7 +91,9 @@ public static class SkinSocketServer {
                 if (!PreheatingUids.Add(uid)) continue;
             }
             started++;
-            _ = Task.Run(() => PreheatUid(uid));
+            var task = Task.Run(() => PreheatUid(uid));
+            PreheatTasks[uid] = task;
+            _ = task.ContinueWith(_ => PreheatTasks.TryRemove(uid, out _));
         }
         if (started > 0) Log.Information("[SkinSocket] tab-list preheat: {Started} player(s) queued (list={All})", started, uuids.Count);
     }
@@ -275,6 +281,7 @@ public static class SkinSocketServer {
     }
 
     private static async Task<SkinResult> FetchAndCacheAsync(string player, string? uuid) {
+        TimeSpan? transientTtl = null; // 会话未就绪等临时性失败: 短缓存 20s, 恢复后立刻重试
         try {
             if (uuid != null) {
                 var online = await FetchNeteaseSkin(player, uuid);
@@ -285,13 +292,16 @@ public static class SkinSocketServer {
                     return result;
                 }
             }
+        } catch (SessionNotReadyException e) {
+            transientTtl = TimeSpan.FromSeconds(20); // 会话重建后很快恢复, 不做长负缓存
+            Log.Warning("[SkinSocket]    session not ready for \"{Player}\": {Msg} (short cache {S}s)", player, e.Message, 20);
         } catch (Exception e) {
             Log.Error("[SkinSocket]    online fetch error for \"{Player}\": {Msg}", player, e.Message);
         }
 
-        // 无皮肤玩家: 回默认皮肤(和网易官方一致), 短 TTL 缓存
+        // 无皮肤玩家: 回默认皮肤(和网易官方一致), 短 TTL 缓存; 临时失败用更短 TTL
         var fallback = DefaultResult();
-        PutCache(player, fallback, permanent: false);
+        PutCache(player, fallback, permanent: false, ttl: transientTtl);
         Log.Information("[SkinSocket]    no online skin for \"{Player}\", using {Fallback}",
             player, string.IsNullOrEmpty(fallback.Path) ? "empty reply" : "default skin_10000.png");
         return fallback;
@@ -302,10 +312,10 @@ public static class SkinSocketServer {
         return new SkinResult(File.Exists(defaultSkin) ? defaultSkin : "", 0);
     }
 
-    private static void PutCache(string player, SkinResult result, bool permanent) {
+    private static void PutCache(string player, SkinResult result, bool permanent, TimeSpan? ttl = null) {
         SkinCache[player] = new CachedSkin {
             Result = result,
-            ExpiresAtTicks = permanent ? PermanentTicks : DateTime.UtcNow.Ticks + NegativeTtl.Ticks
+            ExpiresAtTicks = permanent ? PermanentTicks : DateTime.UtcNow.Ticks + (ttl ?? NegativeTtl).Ticks
         };
     }
 
@@ -322,7 +332,15 @@ public static class SkinSocketServer {
             return null;
         }
 
-        // 0) Tab 预热命中: 跳过全部 API 查询, 直接下载(预热期通常已落盘, 秒回)
+        // 0a) Tab 预热正在跑: 等它完成(最多6秒), 不重复发 API, 预热结果直接复用
+        if (PreheatTasks.TryGetValue(uid, out var running)) {
+            var waited = Task.WhenAny(running, Task.Delay(TimeSpan.FromSeconds(6)));
+            await waited;
+            if (running.IsCompletedSuccessfully)
+                Log.Information("[SkinSocket]    uid={Uid} joined in-flight preheat", uid);
+        }
+
+        // 0b) Tab 预热命中: 跳过全部 API 查询, 直接下载(预热期通常已落盘, 秒回)
         if (UidPlanCache.TryGetValue(uid, out var preheatPlan)) {
             var preheated = await DownloadSkinByIdAsync(preheatPlan.SkinId);
             if (preheated != null) {
@@ -438,6 +456,10 @@ public static class SkinSocketServer {
         return (new SkinPlan(chosen.SkinId, chosen.SkinMode), distinctIds, skins.Length);
     }
 
+    private sealed class SessionNotReadyException : Exception {
+        public SessionNotReadyException(string msg) : base(msg) { }
+    }
+
     private static async Task<EntityUserGameTexture[]?> QueryEquippedSkinsAsync(long uid, EnumGameClientType ct) {
         try {
             var req = new EntityUserGameTextureRequest {
@@ -445,20 +467,30 @@ public static class SkinSocketServer {
                 ClientType = ct,
                 GameType = "2" // EnumGType.NetGame: 只查玩家在【联机】场景当前装备的皮肤(网易官方机制, 不传则返回拥有列表导致皮肤重复)
             };
-            // 调试: 记录完整 API 响应
-            await GatewayGate.WaitAsync();
-            try {
-                var entity = await NPFLauncher.GetSkinListInGameAAsyncRaw(req);
-                if (entity == null) {
-                    Log.Warning("[SkinSocket]    uid={Uid} ct={Ct} API returned null entity", uid, ct);
-                } else {
-                    Log.Information("[SkinSocket]    uid={Uid} ct={Ct} code={Code} msg={Msg} dataCount={Count}",
-                        uid, ct, entity.Code, entity.Message ?? "(null)", entity.Data?.Length ?? 0);
-                }
-                return entity?.Data;
-            } finally {
-                GatewayGate.Release();
+            async Task<EntitiesWPFLauncher<EntityUserGameTexture>?> CallApiAsync() {
+                await GatewayGate.WaitAsync();
+                try { return await NPFLauncher.GetSkinListInGameAAsyncRaw(req); }
+                finally { GatewayGate.Release(); }
             }
+            var entity = await CallApiAsync();
+            // code=10(请先登录): game-play 会话过期, 重建会话后重试一次
+            if (entity != null && entity.Code == 10) {
+                Log.Warning("[SkinSocket]    uid={Uid} ct={Ct} code=10 会话过期, 重建游戏会话后重试", uid, ct);
+                await InterConn.EnsureSessionAsync();
+                entity = await CallApiAsync();
+                if (entity != null && entity.Code == 10) {
+                    throw new SessionNotReadyException($"uid={uid} code=10 after session refresh");
+                }
+            }
+            if (entity == null) {
+                Log.Warning("[SkinSocket]    uid={Uid} ct={Ct} API returned null entity", uid, ct);
+            } else {
+                Log.Information("[SkinSocket]    uid={Uid} ct={Ct} code={Code} msg={Msg} dataCount={Count}",
+                    uid, ct, entity.Code, entity.Message ?? "(null)", entity.Data?.Length ?? 0);
+            }
+            return entity?.Data;
+        } catch (SessionNotReadyException) {
+            throw; // 会话仍未就绪: 向上传播, 不写负缓存, 短缓存后可快速重试
         } catch (Exception e) {
             Log.Warning("[SkinSocket]    uid={Uid} ct={Ct} query failed: {Msg}", uid, ct, e.Message);
             return null;
@@ -475,20 +507,25 @@ public static class SkinSocketServer {
             return local; // 已缓存
         }
 
-        // 取下载 URL
-        await GatewayGate.WaitAsync();
+        // 取下载 URL(资源ID->URL 映射静态, 命中缓存直接省掉一次网关往返)
         string? resUrl;
-        try {
-            var dlInfo = await NPFLauncher.GetNetGameComponentDownloadListAAsync(skinId);
-            resUrl = dlInfo?.SubEntities?
-                .Select(sub => sub.ResUrl)
-                .FirstOrDefault(u => !string.IsNullOrEmpty(u));
-        } finally {
-            GatewayGate.Release();
-        }
-        if (resUrl == null) {
-            Log.Warning("[SkinSocket]    no res_url for skin {SkinId}", skinId);
-            return null;
+        if (ResUrlCache.TryGetValue(skinId, out var cachedUrl)) {
+            resUrl = cachedUrl;
+        } else {
+            await GatewayGate.WaitAsync();
+            try {
+                var dlInfo = await NPFLauncher.GetNetGameComponentDownloadListAAsync(skinId);
+                resUrl = dlInfo?.SubEntities?
+                    .Select(sub => sub.ResUrl)
+                    .FirstOrDefault(u => !string.IsNullOrEmpty(u));
+            } finally {
+                GatewayGate.Release();
+            }
+            if (resUrl == null) {
+                Log.Warning("[SkinSocket]    no res_url for skin {SkinId}", skinId);
+                return null;
+            }
+            ResUrlCache[skinId] = resUrl;
         }
 
         await DownloadGate.WaitAsync();

@@ -1,9 +1,0 @@
-{
-  "id" : "cdf95288bcc44168b166e581b51c9827",
-  "name" : "SayDou",
-  "properties" : [ {
-    "name" : "textures",
-    "value" : "ewogICJ0aW1lc3RhbXAiIDogMTc4ODYwNzMxMDQwOCwKICAicHJvZmlsZUlkIiA6ICJjZGY5NTI4OGJjYzQ0MTY4YjE2NmU1ODFiNTFjOTgyNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJTYXlEb3UiLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzBlOWUzZDJhY2NiY2E3ZGVkMjc0NWJlMzcwZmU1MjI5MDlhOTJlYzFlNWM4YTQ1ZmZjZWU3OGQ1M2Y5ZDQwZSIKICAgIH0KICB9Cn0="
-  } ],
-  "profileActions" : [ ]
-}

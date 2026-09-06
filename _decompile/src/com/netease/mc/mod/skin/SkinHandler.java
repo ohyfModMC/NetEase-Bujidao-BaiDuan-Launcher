@@ -153,8 +153,13 @@ public class SkinHandler {
         }
         UUID uuid = profile.getId();
         boolean nonV4 = uuid == null || uuid.version() != 4;
-        if (nonV4) {
-            LOGGER.info(String.format("player %s non-v4 UUID, trying server texture first, UUID = %s", name, uuid == null ? "null" : uuid.toString()));
+        // 自己用 skin_me/在线皮肤, 必须走 2050(fantnelcli 按 SelfPlayerName 处理), 不能被服务器纹理覆盖
+        String selfName = Minecraft.m_91087_().m_91094_().m_92546_();
+        boolean isSelf = selfName != null && selfName.equals(name);
+        if (!isSelf) {
+            // 所有非自己玩家(真人 v4 + NPC 非 v4): 优先用服务器在 PlayerInfo 包直接下发的纹理
+            // (网易 CDN 直取, 零网关查询, 与官方启动器同速); 服务器没给才走 2050 查 API。
+            LOGGER.info(String.format("player %s (%s) trying server texture first, UUID = %s", name, nonV4 ? "NPC/non-v4" : "v4", uuid == null ? "null" : uuid.toString()));
             Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> serverTex = SkinHandler.getTextures(profile, requireSecure);
             if (serverTex != null && !serverTex.isEmpty()) {
                 if (serverTex instanceof HashMap) {
@@ -163,8 +168,10 @@ public class SkinHandler {
                 return serverTex;
             }
             LOGGER.info(String.format("player %s no server texture, falling back to launcher 2050", name));
+        } else {
+            LOGGER.info(String.format("player %s is self, using launcher 2050 path (skin_me/online)", name));
         }
-        LOGGER.info(String.format("player %s start loading skin from netease, UUID = %s", name, uuid.toString()));
+        LOGGER.info(String.format("player %s start loading skin from netease, UUID = %s", name, uuid == null ? "null" : uuid.toString()));
         resultCache = new HashMap<MinecraftProfileTexture.Type, MinecraftProfileTexture>();
         String LocalSkinUrl = null;
         String LocalCapeUrl = null;
@@ -190,8 +197,12 @@ public class SkinHandler {
         if (nameCapeMap.containsKey(profile.getName())) {
             LocalCapeUrl = nameCapeMap.get(username);
         }
+        boolean gotRealSkin = false; // true=拿到玩家真实皮肤; false=默认/空(不做长缓存, 便于会话恢复/换肤后尽快刷新)
         if (LocalSkinUrl != null && LocalSkinUrl != "") {
             LOGGER.info(String.format("player %s start loading skinurl : %s", name, LocalSkinUrl));
+            if (!LocalSkinUrl.contains("skin_10000")) {
+                gotRealSkin = true;
+            }
             url = SkinHandler.CopySkinToAsset(new File(LocalSkinUrl));
             if (url != null) {
                 boolean isSlim = nameSkinMode.containsKey(name) ? nameSkinMode.get(name) : false;
@@ -208,12 +219,15 @@ public class SkinHandler {
         }
         if (LocalCapeUrl != null && LocalCapeUrl != "") {
             LOGGER.info(String.format("player %s start loading capeurl : %s", name, LocalCapeUrl));
+            gotRealSkin = true;
             url = SkinHandler.CopySkinToAsset(new File(LocalCapeUrl));
             if (url != null) {
                 resultCache.put(MinecraftProfileTexture.Type.CAPE, new MinecraftProfileTexture(url, null));
             }
         }
-        cache.put(name, resultCache);
+        if (gotRealSkin) {
+            cache.put(name, resultCache); // 真实皮肤长缓存(30分钟); 默认皮肤不缓存, 下次请求可重新查 2050
+        }
         return resultCache;
     }
 
