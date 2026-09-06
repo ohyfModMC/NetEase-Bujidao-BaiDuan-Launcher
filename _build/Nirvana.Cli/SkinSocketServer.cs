@@ -59,7 +59,10 @@ public static class SkinSocketServer {
     private static readonly TimeSpan NegativeTtl = TimeSpan.FromMinutes(3); // 无皮肤/默认结果短缓存
     private static readonly TimeSpan OnlineBudget = TimeSpan.FromSeconds(9); // 在线取皮总预算, 超时先回默认
     private static readonly SemaphoreSlim GatewayGate = new(12); // 限制网易 Gateway API 并发, 防 80 人 Tab 同时查询互相拖慢/限流
-    private static readonly SemaphoreSlim DownloadGate = new(4); // 限制皮肤下载并发
+    private static readonly SemaphoreSlim DownloadGate = new(4); // 皮肤下载并发(网易CDN高并发反而限速/拖慢, 实测 4 比 12 稳定)
+    // 后台【预热】独立小闸门: 预热是低优先级, 只能涓流(3并发)进行, 绝不能挤占真人 2050(方案一实时API)的槽位。
+    // 整个 PreheatUid 流程(查询+下载)都在该闸门内, 故预热最多占用 3 个 GatewayGate/DownloadGate 槽位, 其余留给真人请求。
+    private static readonly SemaphoreSlim PreheatGate = new(3);
     // skinId -> 资源下载URL 静态缓存(资源ID与下载地址映射不变), 省掉"取下载列表"网关往返
     private static readonly ConcurrentDictionary<string, string> ResUrlCache = new();
 
@@ -99,6 +102,7 @@ public static class SkinSocketServer {
     }
 
     private static async Task PreheatUid(long uid) {
+        await PreheatGate.WaitAsync(); // 预热低优先级: 全局最多 3 个玩家同时预热, 把闸门槽位留给真人 2050
         try {
             var outcome = await QuerySkinPlanAsync(uid, null);
             if (outcome == null) {
@@ -113,6 +117,7 @@ public static class SkinSocketServer {
         } catch (Exception e) {
             Log.Warning("[SkinSocket] preheat uid={Uid} error: {Msg}", uid, e.Message);
         } finally {
+            PreheatGate.Release();
             lock (PreheatLock) { PreheatingUids.Remove(uid); }
         }
     }
@@ -332,10 +337,9 @@ public static class SkinSocketServer {
             return null;
         }
 
-        // 0a) Tab 预热正在跑: 等它完成(最多6秒), 不重复发 API, 预热结果直接复用
+        // 0a) Tab 预热正在跑: 稍等它完成(最多2.5秒)复用结果; 预热被限流可能排队, 超时就走真人优先通道, 不久等
         if (PreheatTasks.TryGetValue(uid, out var running)) {
-            var waited = Task.WhenAny(running, Task.Delay(TimeSpan.FromSeconds(6)));
-            await waited;
+            await Task.WhenAny(running, Task.Delay(TimeSpan.FromSeconds(2.5)));
             if (running.IsCompletedSuccessfully)
                 Log.Information("[SkinSocket]    uid={Uid} joined in-flight preheat", uid);
         }
@@ -465,7 +469,8 @@ public static class SkinSocketServer {
             var req = new EntityUserGameTextureRequest {
                 UserId = uid.ToString(),
                 ClientType = ct,
-                GameType = "2" // EnumGType.NetGame: 只查玩家在【联机】场景当前装备的皮肤(网易官方机制, 不传则返回拥有列表导致皮肤重复)
+                GameType = "2", // EnumGType.NetGame: 只查玩家在【联机】场景当前装备的皮肤(网易官方机制, 不传则返回拥有列表导致皮肤重复)
+                GameId = InterConn.LastGameId ?? Nirvana.Heypixel.HeypixelProtocol.GameId // 显式携带当前联机服 game_id(服务器上下文), 否则可能 code=0 但 dataCount=0
             };
             async Task<EntitiesWPFLauncher<EntityUserGameTexture>?> CallApiAsync() {
                 await GatewayGate.WaitAsync();

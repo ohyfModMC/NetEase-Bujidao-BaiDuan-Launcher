@@ -29,3 +29,7 @@ captcha_*.png
 # ===== 游戏运行时缓存(每次运行都变, 不入库) =====
 .minecraft/CustomSkinLoader/caches/
 .minecraft/versions/*/natives/
+
+# ===== mod jar 备份(注入前自动备份, 不入库) =====
+.minecraft/mods/*.bak
+.minecraft/mods/*.pretex.bak
